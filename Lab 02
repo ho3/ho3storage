@@ -1,0 +1,204 @@
+/*
+
+Name: Jason Ho
+Course: CNIT 315
+Lab: 2
+Section: 315-008
+Date Due: 2/11/2015
+Last Modified: 2/11/2015
+Email: ho3@purdue.edu	
+
+Project Description: Lab 2 is a program designed to roll out a menu displaying three different functional programs available to choose from to perform different functions based on specific coding techniques: 
+
+	- These 3 programs are the factorial program, the fibonacci sequence program, and the Tower of Hanoi program. 
+
+	- They will each perform their respective mathematical functions and the Tower of Hanoi will print out all moves performed based on how many disks are determined by the input of the user. 
+
+	- This program strongly focuses on functions and recursion which is what the factorial, fibonacci, and tower of hanoi programs are strongly designed for.
+	
+	Enjoy.
+	
+	-Jason
+
+*/
+
+#include <stdio.h>
+#include <math.h>
+
+	int factorial(int);										//Declares Function for the factorial
+  int fibonacci(int);										//Declares Function for the fibonacci
+	void run_hanoi(int, char, char, char);// Declares Function for the Tower of Hanoi
+
+
+int main(void)
+{
+
+  int num_choice; //variable to hold input for menu choice.
+  int factInput;  //variable to hold input for the factorial function.
+  int factResult; //variable to hold the result of the factorial calculations.
+  int fibInput;   //variable to hold input for the fibonacci function.
+  int fibResult;  //variable to hold the result of the fibonacci calculations.
+  int disk_num;		//variable to hold the input number of disks from the user.
+	
+	do
+	{
+
+	// -----------------------Prints the menu.-----------------------------------------
+	
+	printf("\n");
+	printf("Welcome to the Lab 2 Recursive calculator!\n");
+	printf("Please choose an option, No negative numbers will be accepted.\n");
+	printf("1.) Factorial\n");
+	printf("2.) Fibonacci\n");
+	printf("3.) Tower of Hanoi\n");
+	printf("4.) Exit\n");
+	
+	scanf("%d", &num_choice);
+
+	//------------case-switch to determine what program to run.-------------------------
+	
+		switch(num_choice)
+		{
+		case 1:
+		  
+		  printf("\nPlease select a number for your factorial!\n");
+		  scanf("%d", &factInput);
+			
+			if ( factInput < 0 )
+			{
+			  //Outputs error message after incorrect input.
+				printf("Sorry, no negative numbers, please try again!\n");
+				
+				return 1;
+			}
+			else		  
+			{
+				//calculates the result of the factorial function.
+					
+		  	factResult = factorial(factInput); // Calls the factorial function. Example of Recursion.
+		
+		  	printf("The result is: %d\n", factResult);
+		  	printf("\n");
+
+			}
+		  
+			break;
+
+		case 2:
+		  
+		  printf("Please select a number for your fibonacci sequence!\n");
+		  scanf("%d", &fibInput);
+
+			if ( fibInput < 0 )
+			{
+				//outputs error message after incorrect input.
+			  
+				printf("Sorry, no negative numbers, please try again!\n");
+				
+				return 2;
+			}
+			else		  
+			{
+				//calculates the result of the fibonacci function.	
+
+		  	fibResult = fibonacci(fibInput);//Calls the fibonacci function. Second example of recursion.
+
+		  	printf("The result is: %d\n", fibResult);
+		  	printf("\n");
+		  
+			}
+			
+			break;
+		  
+		case 3:
+		
+		  printf("Please select the number of disks needed for your Tower of Hanoi!\n");
+		  scanf("%d", &disk_num);
+
+			//runs the Tower of Hanoi sequence.
+			if ( disk_num <= 0 )
+			{
+			  //outputs error message after incorrect input.
+				printf("Sorry, no non-zero or negative numbers, please try again!\n");
+				
+				return 3;
+			}
+			else		  
+			{
+		 		run_hanoi(disk_num, 'A', 'C', 'B');	// Calls the Tower of Hanoi function. Third example.
+				printf("\n"); 
+			}
+			
+			break;	
+		
+		case 4:
+		
+			//exit function.
+
+		  return 0;
+		  break;
+		}
+	
+	}
+	while( 1 == 1);
+	
+}
+
+//----------------------------------Function Section--------------------------------------------
+  
+  
+ //Tower of Hanoi Function demonstrates calculations for every move performed from slots A through C.
+
+	void run_hanoi(int disk_num, char from_slot, char to_slot, char spare_slot)
+	{
+
+		if (disk_num == 1)
+		{
+
+			//prints every single move performed from slot A to slot C as the final goal.
+		
+		  printf( "Move disk 1 from peg %c to peg %c\n", from_slot, to_slot);
+      
+      return;
+		}
+	run_hanoi(disk_num-1, from_slot, spare_slot, to_slot);
+	//run_hanoi(1, from_slot, to_slot, spare_slot);
+
+	//Referenced from http://www.sanfoundry.com/c-program-tower-of-hanoi-using-recursion/
+	printf("Move disk %d from peg %c to peg %c\n", disk_num, from_slot, to_slot);
+	run_hanoi(disk_num-1, spare_slot, to_slot, from_slot);
+	}
+	
+
+
+	//-------------Factorial function demonstrates factorial calculations.--------------
+
+	int factorial(int n)
+	{
+		if (n==0)
+		{
+		 	return 1;
+		}
+		else
+		{
+		 	return n*factorial(n-1);
+		}
+	}
+
+  //-------Fibonacci Sequence function demonstrates fibonacci sequence calculations.----------
+  
+  int fibonacci(int n)
+  {
+    if ( n == 0 )
+    {
+      return 0;
+    }
+    else if ( n == 1)
+    {
+      return 1;
+    }
+    else 
+    {
+      return ( fibonacci(n - 1) + fibonacci (n - 2) );
+    }
+  }
