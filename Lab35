@@ -1,0 +1,137 @@
+/** lab3_main.c: Implements a front end for lab3_lib.c.
+*
+*
+* Name: Jason Ho
+* Email: ho3@purdue.edu
+* Course: CNIT 315
+* Lab batch: 315-008
+* Lab assignment: 3
+* Date: 2/25/2015
+*
+* Collaborators:
+* -Cyrus Suttaria
+*/
+
+#include <time.h> //for time()
+#include <stdio.h>
+#include "lab3_lib.h"
+
+
+int main()
+{
+
+int num_choice;
+int addValue;
+int size=0;
+int array_temp[0];
+int binaryValue;
+int *point;
+
+
+point = (int*) malloc( size * sizeof(int));
+
+do
+	{
+
+	//Determine the size of the array
+//	printf("Please define the size of the array.");
+	//scanf("%d", &size);
+	
+	
+	// -----------------------Prints the menu.--------------------------------
+	
+	printf("\n");
+	printf("Welcome to the Lab 3.5 Sort and Search\n");
+	printf("Please choose an option.\n");
+	printf("1.) Add a new Value\n");
+	printf("2.) Sort the Array\n");
+	printf("3.) Search for a particular value\n");
+	printf("4.) Exit\n");
+	
+	scanf("%d", &num_choice);
+
+  size++;
+
+switch(num_choice)
+{
+	case 1:
+	
+		
+  	array_temp = (int*) malloc( size * sizeof(int));
+		
+	  deep_copy_array(point, array_temp, size);
+	  free(point);
+	  point = array_temp;
+		
+		// Add a new value.
+		printf("Please input a value.");
+		scanf("%d", &addValue);
+		
+		if(point == NULL)
+		{
+		
+			printf("Error! The Memory is not allocated.");
+			return 1;
+		
+		}
+		
+/*		point = (int*) realloc (point, size * sizeof(int));
+		
+		if (point == NULL)
+		{
+			printf("Error reallocating memory!");
+			//Free the initial memory block.
+			free (point);
+			
+			return 2;
+
+		}
+		free (point);
+		
+	*/	
+	
+	break;
+	
+	case 2:
+	
+		//Insertion sort here.
+		
+    array_temp = (int*) malloc(size * sizeof(int));
+		
+		insertion_sort( point, size, array_temp);
+		
+		for( i = 0; i < size; i++)
+		{
+		
+		  printf("%d\n",array_temp[i]);
+		
+		}
+		
+	
+	break;
+	
+	case 3:
+	
+	  printf("Please input a value to search.");
+	  scanf("%d", &binaryValue);
+	
+		// Binary search here.
+		int binary_search(int point, int size, int binaryValue, int* location);
+		
+		return 3
+	
+	break;
+	
+	case 4:
+	
+	//Exit
+	
+	return 0;
+	break;
+
+}
+
+	}while(1 == 1)
+	
+
+}
